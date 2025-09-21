@@ -1,23 +1,23 @@
-# 🧪 test_pipeline
+# Django Server
 
 A practice project to set up a **Django application** with a **local staging deployment pipeline** for learning and testing purposes.
 
 ---
 
-## 🚀 Project Overview
+## Project Overview
 
 This project demonstrates:
 
-- ✅ Setting up a basic Django app (`duck_app`)
-- ✅ Creating a simple **GET API** for health check
-- ✅ Running the server in **staging mode**
-- ✅ Practicing CI/CD pipeline workflows for local deployment (GitHub Actions or custom script)
+- Setting up a basic Django app (`duck_app`)
+- Creating a simple **GET API** for health check
+- Running the server in **staging mode**
+- Practicing CI/CD pipeline workflows for local deployment (GitHub Actions or custom script)
 
 The goal is to simulate a real development workflow where code pushed to the `staging` branch triggers a pipeline that builds, tests, and deploys locally for validation.
 
 ---
 
-## 🔧 Installation & Setup
+## Installation & Setup
 
 ### Clone the repository
 
@@ -47,4 +47,10 @@ You should see:
   "message": "Test API is working!",
   "environment": "staging"
 }
+```
+
+### Run Test
+
+```
+pytest -v
 ```
