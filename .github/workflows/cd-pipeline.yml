@@ -6,6 +6,9 @@ on:
       - staging
       - master
 
+permissions:
+  contents: write
+
 jobs:
   run-tests-and-merge:
     runs-on: ubuntu-latest
