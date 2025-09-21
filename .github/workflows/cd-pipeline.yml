@@ -28,6 +28,11 @@ jobs:
           source venv/bin/activate
           pip install -r requirements.txt
 
+      - name: Ensure Django starts without crashing
+        run: |
+          python manage.py check
+
+
       - name: Run tests
         run: |
           source venv/bin/activate
