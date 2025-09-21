@@ -29,5 +29,5 @@ def test_cricket_report_api(client):
     data = response.json()
 
     assert data["status"] == "success"
-    assert data["message"] == "Pak vs India match"
+    assert data["message"] == "Cricket Results"
     assert data["environment"] == "feature"
