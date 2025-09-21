@@ -15,7 +15,7 @@ def test_api(request):
 def cricket_report(request):
     return Response({
         "status": "success",
-        "message": "Pak vs India match",
+        "message": "Cricket Results",
         "environment": "feature"
     })
 
