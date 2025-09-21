@@ -22,20 +22,12 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
+      - name: Install dependencies, check Django, and run tests
         run: |
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
-
-      - name: Ensure Django starts without crashing
-        run: |
           python manage.py check
-
-
-      - name: Run tests
-        run: |
-          source venv/bin/activate
           pytest --maxfail=1 --disable-warnings -v
 
       - name: Merge branch into staging
