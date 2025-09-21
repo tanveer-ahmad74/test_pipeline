@@ -6,6 +6,9 @@ on:
       - staging
       - master
 
+permissions:
+  contents: write
+
 jobs:
   run-tests-and-merge:
     runs-on: ubuntu-latest
@@ -38,4 +41,4 @@ jobs:
           from_branch: ${{ github.ref_name }}
           target_branch: staging
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
