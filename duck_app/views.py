@@ -9,3 +9,13 @@ def test_api(request):
         "environment": "staging"
     })
 
+
+
+@api_view(['GET'])
+def cricket_report(request):
+    return Response({
+        "status": "success",
+        "message": "Pak vs India match",
+        "environment": "feature"
+    })
+

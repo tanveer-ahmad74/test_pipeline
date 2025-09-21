@@ -1,4 +1,4 @@
-name: CD Pipeline - Auto Merge and Deploy
+name: CI/CD Pipeline - Auto Merge to Staging
 
 on:
   push:
@@ -6,31 +6,39 @@ on:
       - staging
       - master
 
+permissions:
+  contents: write
+
 jobs:
   run-tests-and-merge:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout feature branch
-      - uses: actions/checkout@v3
+      - name: Checkout branch
+        uses: actions/checkout@v3
 
       - name: Set up Python
-      - uses: actions/setup-python@v4
+        uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
       - name: Install dependencies
         run: |
-            python -m venv venv
-            source venv/bin/activate
-            pip install -r requirements.txt
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+
+      - name: Ensure Django starts without crashing
+        run: |
+          python manage.py check
+
 
       - name: Run tests
         run: |
-            source venv/bin/activate
-            pytest --maxfail=1 --disable-warnings -v
+          source venv/bin/activate
+          pytest --maxfail=1 --disable-warnings -v
 
-      - name: Merge feature branch into staging
+      - name: Merge branch into staging
         if: success()
         uses: devmasx/merge-branch@v1.4.0
         with:
@@ -38,14 +46,4 @@ jobs:
           from_branch: ${{ github.ref_name }}
           target_branch: staging
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Merge staging into master
-        if: success()
-        uses: devmasx/merge-branch@v1.4.0
-        with:
-          type: now
-          from_branch: staging
-          target_branch: master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
